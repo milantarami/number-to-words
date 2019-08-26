@@ -1,0 +1,28 @@
+{
+    "name": "milantarami/number-to-words",
+    "description": "A sweet package for converting a number to words that support Nepali & Internationa Numbering System",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Milan Tarami",
+            "email": "44134655+milantarami@users.noreply.github.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "MilanTarami\\NumberToWordsConverter\\" : "src/"
+        }
+    },
+
+    "extra": {
+        "laravel": {
+            "providers": [
+                "MilanTarami\\NumberToWordsConverter\\NumberToWordsServiceProvider"
+            ]
+        }
+    }
+
+}
