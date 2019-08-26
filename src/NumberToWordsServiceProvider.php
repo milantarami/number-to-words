@@ -3,7 +3,6 @@
 namespace MilanTarami\NumberToWordsConverter;
 
 use Illuminate\Support\ServiceProvider;
-use MilanTarami\NumberToWordsConverter\Services\NumberToWords;
 
 class NumberToWordsServiceProvider extends ServiceProvider
 {
@@ -14,7 +13,7 @@ class NumberToWordsServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->register('MilanTarami\NumberToWordsConverter\NumberToWordsServiceProvider');
+        // $this->app->register('MilanTarami\NumberToWordsConverter\NumberToWordsServiceProvider');
     }
 
     /**
