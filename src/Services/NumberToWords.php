@@ -2,6 +2,8 @@
 
 namespace MilanTarami\NumberToWordsConverter\Services;
 
+use App\Http\Controllers\NepaliNumberingSystem;
+
 class NumberToWords
 {
     
@@ -19,46 +21,39 @@ class NumberToWords
         'एकतिस', 'बत्तीस', 'तेत्तीस', 'चाैतीस', 'पैतिस', 'छत्तीस', 'सरतीस', 'अरतीस', 'उननचालीस', 'चालीस',
         'एकचालीस', 'बयालिस', 'तीरचालीस', 'चौवालिस', 'पैंतालिस', 'छयालिस', 'सरचालीस', 'अरचालीस', 'उननचास', 'पचास',
         'एकाउन्न', 'बाउन्न', 'त्रिपन्न', 'चौवन्न', 'पच्पन्न', 'छपन्न', 'सन्ताउन्न', 'अन्ठाउँन्न', 'उनान्न्साठी', 'साठी',
-        'एकसाठी', 'बासाठी', 'तीरसाठी', 'चौंसाठी', 'पैसाठी', 'छैसठी', 'सत्सठ्ठी', 'अर्सठ्ठी', 'उनन्सत्तरी', 'सतरी',
+        'एकसट्ठी', 'बयसट्ठी', 'त्रिसट्ठी', 'चौंसट्ठी', 'पैंसट्ठी', 'छयसट्ठी', 'सतसट्ठी', 'अठसट्ठी', 'उनन्सत्तरी', 'सत्तरी',
         'एकहत्तर', 'बहत्तर', 'त्रिहत्तर', 'चौहत्तर', 'पचहत्तर', 'छहत्तर', 'सत्हत्तर', 'अठ्हत्तर', 'उनास्सी', 'अस्सी',
         'एकासी', 'बयासी', 'त्रीयासी', 'चौरासी', 'पचासी', 'छयासी', 'सतासी', 'अठासी', 'उनान्नब्बे', 'नब्बे',
         'एकान्नब्बे', 'बयान्नब्बे', 'त्रियान्नब्बे', 'चौरान्नब्बे', 'पंचान्नब्बे', 'छयान्नब्बे', 'सन्तान्‍नब्बे', 'अन्ठान्नब्बे', 'उनान्सय', ' एक सय'
     ];
 
-    protected $responseType,  $lang, $numberingSystem;
+    protected $monetryUnit, $responseType,  $lang, $numberingSystem;
 
     // references http://www.nepaliclass.com/large-nepali-numbers-lakh-karod-arab-kharab/
 
     public function __construct()
     {
         // $this->isValidInput();
-
     }
 
     /**
      *
      * @param Mixed $input
-     * @param Boolean $monetaryUnit default = ture
-     * @param String $responseType (expected values are array/string) default = string
-     * @param String $lang response language (expected values are English(en)/Nepali(np)) default = en
-     * @param String $numberingSystem  (Nepali Numbersing System (nns) / International Numbering System (ins)) default = nns
+     * @param Array $optionalParams
      * **/
 
-    public function __invoke()
-    {
-        $this->get(12.2354);
-    }
 
-    private function get($input, $monetaryUnit = true, $responseType = 'string', $lang = 'en', $numberingSystem = 'nns')
+    public static function get($input, $optionalParams = [])
     {
-        $this->lang = $lang;
+        $monetaryUnit = config('number_to_words.monetary_unit');
+        $numberingSystem = config('number_to_words.numbering_system');
+        
+        // , $monetaryUnit = true, $responseType = 'string', $lang = 'en', $numberingSystem = 'nns'
         // dump('input ' . $input);
         // dump('monetryUnit ' . $monetaryUnit);
         // dump('responseType '.  $responseType);
         // dump('lang ' . $this->lang);
         // dump('numberingSystem ' . $numberingSystem);
-        // dd(func_get_args());
-
         switch ($numberingSystem) {
             case 'nns':
                 $nepaliNumberingSystem = new NepaliNumberingSystem();

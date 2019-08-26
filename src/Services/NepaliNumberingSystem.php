@@ -1,5 +1,7 @@
 <?php
 
+namespace MilanTarami\NumberToWordsConverter\Services\NepaliNumberingSystem;
+
 use MilanTarami\NumberToWordsConverter\Services\NumberToWords;
 
 class NepaliNumberingSystem extends NumberToWords{
