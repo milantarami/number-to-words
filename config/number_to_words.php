@@ -38,7 +38,8 @@ return [
     * Monetary Units for Nepal [ in English and Nepali ]
     **/
 
-    'monetary_units' => [
+    'monetary_unit' => [
+
         'en' => [ 
             'Rupees', 'Paisa'
         ],

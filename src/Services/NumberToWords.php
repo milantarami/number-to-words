@@ -2,7 +2,8 @@
 
 namespace MilanTarami\NumberToWordsConverter\Services;
 
-use App\Http\Controllers\NepaliNumberingSystem;
+use MilanTarami\NumberToWordsConverter\Services\NepaliNumberingSystem\NepaliNumberingSystem;
+use MilanTarami\NumberToWordsConverter\Services\InternationalNumberingSystem\InternationalNumberingSystem;
 
 class NumberToWords
 {
@@ -27,13 +28,14 @@ class NumberToWords
         'एकान्नब्बे', 'बयान्नब्बे', 'त्रियान्नब्बे', 'चौरान्नब्बे', 'पंचान्नब्बे', 'छयान्नब्बे', 'सन्तान्‍नब्बे', 'अन्ठान्नब्बे', 'उनान्सय', ' एक सय'
     ];
 
-    protected $monetryUnit, $responseType,  $lang, $numberingSystem;
-
+    private $nepaliNumberingSystem, $internationalNumberingSystem;
     // references http://www.nepaliclass.com/large-nepali-numbers-lakh-karod-arab-kharab/
 
-    public function __construct()
+    public function __construct(NepaliNumberingSystem $nepaliNumberingSystem, InternationalNumberingSystem $internationalNumberingSystem)
     {
         // $this->isValidInput();
+        $this->nepaliNumberingSystem = $nepaliNumberingSystem;
+        $this->internationalNumberingSystem = $internationalNumberingSystem;
     }
 
     /**
@@ -45,19 +47,15 @@ class NumberToWords
 
     public static function get($input, $optionalParams = [])
     {
-        $monetaryUnit = config('number_to_words.monetary_unit');
-        $numberingSystem = config('number_to_words.numbering_system');
+        $monetaryUnitEnable = array_key_exists('monetary_unit_enable', $optionalParams) ? $optionalParams['monetary_unit_enable'] : config('number_to_words.monetary_unit_enable');
+        $monetaryUnit = array_key_exists('monetary_unit', $optionalParams) ? $optionalParams['monetary_unit'] : config('number_to_words.monetary_unit');
+        $numberingSystem = array_key_exists('numbering_system', $optionalParams) ? $optionalParams['numbering_system'] : config('number_to_words.numbering_system');
+        $lang = array_key_exists('lang', $optionalParams) ? $optionalParams['lang'] : config('number_to_words.lang');
+        $responseType = array_key_exists('response_type', $optionalParams) ? $optionalParams['response_type'] : config('number_to_words.response_type');
         
-        // , $monetaryUnit = true, $responseType = 'string', $lang = 'en', $numberingSystem = 'nns'
-        // dump('input ' . $input);
-        // dump('monetryUnit ' . $monetaryUnit);
-        // dump('responseType '.  $responseType);
-        // dump('lang ' . $this->lang);
-        // dump('numberingSystem ' . $numberingSystem);
         switch ($numberingSystem) {
             case 'nns':
-                $nepaliNumberingSystem = new NepaliNumberingSystem();
-                $result = $nepaliNumberingSystem->output($input, $monetaryUnit);
+                $result = $this->nepaliNumberingSystem->output($input, $monetaryUnit);
                 break;
             case 'ins':
 
