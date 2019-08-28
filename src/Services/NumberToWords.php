@@ -2,8 +2,8 @@
 
 namespace MilanTarami\NumberToWordsConverter\Services;
 
-use MilanTarami\NumberToWordsConverter\Services\NepaliNumberingSystem\NepaliNumberingSystem;
-use MilanTarami\NumberToWordsConverter\Services\InternationalNumberingSystem\InternationalNumberingSystem;
+use MilanTarami\NumberToWordsConverter\Services\NepaliNumberingSystem;
+use MilanTarami\NumberToWordsConverter\Services\InternationalNumberingSystem;
 
 class NumberToWords
 {
@@ -31,11 +31,13 @@ class NumberToWords
     private $nepaliNumberingSystem, $internationalNumberingSystem;
     // references http://www.nepaliclass.com/large-nepali-numbers-lakh-karod-arab-kharab/
 
-    public function __construct(NepaliNumberingSystem $nepaliNumberingSystem, InternationalNumberingSystem $internationalNumberingSystem)
+    public function __construct($nepaliNumberingSystem, $internationalNumberingSystem)
     {
         // $this->isValidInput();
         $this->nepaliNumberingSystem = $nepaliNumberingSystem;
         $this->internationalNumberingSystem = $internationalNumberingSystem;
+        dd(func_get_args());
+        dd('ok');
     }
 
     /**
@@ -45,8 +47,10 @@ class NumberToWords
      * **/
 
 
-    public static function get($input, $optionalParams = [])
+    public function get($input, $optionalParams = [])
     {
+        dd('ok');
+
         $monetaryUnitEnable = array_key_exists('monetary_unit_enable', $optionalParams) ? $optionalParams['monetary_unit_enable'] : config('number_to_words.monetary_unit_enable');
         $monetaryUnit = array_key_exists('monetary_unit', $optionalParams) ? $optionalParams['monetary_unit'] : config('number_to_words.monetary_unit');
         $numberingSystem = array_key_exists('numbering_system', $optionalParams) ? $optionalParams['numbering_system'] : config('number_to_words.numbering_system');

@@ -1,6 +1,6 @@
 <?php
 
-namespace MilanTarami\NumberToWordsConverter\Services\InternationalNumberingSystem;
+namespace MilanTarami\NumberToWordsConverter\Services;
 
 use MilanTarami\NumberToWordsConverter\Services\NumberToWords;
 

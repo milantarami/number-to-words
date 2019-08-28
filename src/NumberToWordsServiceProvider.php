@@ -3,6 +3,9 @@
 namespace MilanTarami\NumberToWordsConverter;
 
 use Illuminate\Support\ServiceProvider;
+use MilanTarami\NumberToWordsConverter\Services\NepaliNumberingSystem;
+use MilanTarami\NumberToWordsConverter\Services\InternationalNumberingSystem;
+use MilanTarami\NumberToWordsConverter\Services\NumberToWords;
 
 class NumberToWordsServiceProvider extends ServiceProvider
 {
@@ -26,13 +29,14 @@ class NumberToWordsServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-
         if($this->app->runningInConsole()) {
             $this->publishes(
                 [ __DIR__.'/../config/number_to_words.php' => config_path('number_to_words.php'), ],
                 'number-to-words-config'
             );
         }
-
+        $this->app->bind('numbertowords', function() {
+            return new NumberToWords(NepaliNumberingSystem::class, InternationalNumberingSystem::class);
+        });
     }
 }
