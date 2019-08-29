@@ -4,7 +4,6 @@ namespace MilanTarami\NumberToWordsConverter;
 
 use Illuminate\Foundation\AliasLoader;
 use Illuminate\Support\ServiceProvider;
-use MilanTarami\NumberToWordsConverter\Facades\NumberToWordsFacade;
 use MilanTarami\NumberToWordsConverter\Services\NumberToWords;
 
 class NumberToWordsServiceProvider extends ServiceProvider
@@ -39,6 +38,6 @@ class NumberToWordsServiceProvider extends ServiceProvider
             return new NumberToWords();
         });
 
-        AliasLoader::getInstance()->alias('NumberToWords', NumberToWordsFacade::class);
+        AliasLoader::getInstance()->alias('NumberToWords', 'MilanTarami\NumberToWordsConverter\Facades\NumberToWordsFacade');
     }
 }
