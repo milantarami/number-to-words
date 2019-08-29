@@ -3,8 +3,6 @@
 namespace MilanTarami\NumberToWordsConverter;
 
 use Illuminate\Support\ServiceProvider;
-use MilanTarami\NumberToWordsConverter\Services\NepaliNumberingSystem;
-use MilanTarami\NumberToWordsConverter\Services\InternationalNumberingSystem;
 use MilanTarami\NumberToWordsConverter\Services\NumberToWords;
 
 class NumberToWordsServiceProvider extends ServiceProvider
@@ -36,7 +34,7 @@ class NumberToWordsServiceProvider extends ServiceProvider
             );
         }
         $this->app->bind('numbertowords', function() {
-            return new NumberToWords(NepaliNumberingSystem::class, InternationalNumberingSystem::class);
+            return new NumberToWords();
         });
     }
 }

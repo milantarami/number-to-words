@@ -16,7 +16,12 @@ class NepaliNumberingSystem extends NumberToWords{
         'हजार', 'लाख', 'करोड', 'अर्ब', 'खर्ब', 'नील', 'पद्म'
     ];
 
-    public function output($input)
+    public function __construct()
+    {
+        
+    }
+
+    public function output($input, $lang)
     {
         /**
          * PHP dropping decimals without rounding up
@@ -36,8 +41,8 @@ class NepaliNumberingSystem extends NumberToWords{
             }
         }
         return [
-            'rupeesInWords' => !empty($rupeesInWords) ? $rupeesInWords . ' Rupees' : '',
-            'paisaInWords' => !empty($paisaInWords) ? $paisaInWords . ' Paisa' : '',
+            'integerInWords' => $rupeesInWords,
+            'pointsInWords' => $paisaInWords
         ];
     }
 
