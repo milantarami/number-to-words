@@ -2,6 +2,7 @@
 
 namespace MilanTarami\NumberToWordsConverter\Services;
 
+use Exception;
 use MilanTarami\NumberToWordsConverter\Services\NepaliNumberingSystem;
 use MilanTarami\NumberToWordsConverter\Services\InternationalNumberingSystem;
 
@@ -33,9 +34,7 @@ class NumberToWords
     // references http://www.nepaliclass.com/large-nepali-numbers-lakh-karod-arab-kharab/
 
     public function __construct()
-    {
-        
-    }
+    { }
 
     /**
      *
@@ -70,11 +69,10 @@ class NumberToWords
      * Numbers Between 0 - 99
      * @param Int $number
      **/
-    protected function lessThan100($number)
+    protected function lessThan100($number, $lang)
     {
         $numArr = str_split($number, 1);
-        dd($this->lang);
-        switch ($this->lang) {
+        switch ($lang) {
             case 'en':
                 return $number < 20 ? $this->en1[(int) $number] : (($number % 10 == 0) ? $this->en2[$numArr[0]] : $this->en2[$numArr[0]] . '-' . strtolower($this->en1[$numArr[1]]));
                 break;
@@ -84,22 +82,27 @@ class NumberToWords
             default:
                 throw new Exception('Supported language English / Nepali');
         }
-        // if ($number < 20)
-        //     return $this->en1[$number];
-        // else
-        //     return ($number % 10 == 0) ? $this->en2[$numArr[0]] : $this->en2[$numArr[0]] . '-' . strtolower($this->en1[$numArr[1]]);
     }
 
     /**
      * Numbers Between 0 - 999
      * @param Int $number
      **/
-    protected function lessThan1000($number)
+    protected function lessThan1000($number, $lang)
     {
         $numArr =  array_map(function ($num) {
             return strrev($num);
         }, str_split(strrev($number), 2));
-        return array_key_exists('1', $numArr) && $numArr[1] > 0 ? $this->en1[$numArr[1]] . ' Hundred ' . $this->lessThan100($numArr[0]) : $this->lessThan100($numArr[0]);
+        switch ($lang) {
+            case 'en':
+                return array_key_exists('1', $numArr) && $numArr[1] > 0 ? $this->en1[$numArr[1]] . ' ' . $this->np[10] . ' ' . $this->lessThan100($numArr[0], $lang) : $this->lessThan100($numArr[0], $lang);
+                break;
+            case 'np':
+                return array_key_exists('1', $numArr) && $numArr[1] > 0 ? $this->np[$numArr[1]] . ' ' . $this->np[100] . ' ' . $this->lessThan100($numArr[0], $lang) : $this->lessThan100($numArr[0], $lang);
+                break;
+            default:
+                throw new Exception('Supported language English / Nepali');
+        }
     }
 
     private function isValidInput()
@@ -109,5 +112,4 @@ class NumberToWords
         //must not contain multiple dots(.)
         // throw new Exception('Only int & double values are supported');
     }
-
 }

@@ -4,22 +4,21 @@ namespace MilanTarami\NumberToWordsConverter\Services;
 
 use MilanTarami\NumberToWordsConverter\Services\NumberToWords;
 
-class NepaliNumberingSystem extends NumberToWords{
+class NepaliNumberingSystem extends NumberToWords
+{
 
-    
-    protected $en  = [
+
+    protected $nnsEN  = [
         'Thousand', 'Lakh', 'Crore', 'Arab', 'Kharab', 'Neel', 'Padam', 'Shankha', 'Udpadh', 'Ank', 'Jald', 'Madh', 'Paraardha',
         'Ant', 'Maha Ant', 'Shishant', 'Singhar', 'Maha Singhar', 'Adanta Singhar'
     ];
 
-    protected $np  = [
+    protected $nnsNP  = [
         'हजार', 'लाख', 'करोड', 'अर्ब', 'खर्ब', 'नील', 'पद्म'
     ];
 
     public function __construct()
-    {
-        
-    }
+    { }
 
     public function output($input, $lang)
     {
@@ -28,22 +27,33 @@ class NepaliNumberingSystem extends NumberToWords{
          * https://stackoverflow.com/a/9079182/10525009
          **/
         $input = number_format(intval($input * 100) / 100, 2, '.', '');
-        list($rupeesVal, $paisaVal) = explode('.', $input);
-        $paisaInWords = parent::lessThan100($paisaVal);
-        list($aboveHundreds, $hundreds) = $rupeesVal > 999 ? preg_split('/(?<=.{' . (strlen($rupeesVal) - 3) . '})/', $rupeesVal, 2) : [0, $rupeesVal];
-        $rupeesInWords = parent::lessThan1000($hundreds);
-        $aboveHundredsArr = empty($rupeesVal) ? [] : array_map(function ($num) {
-            return strrev($num);
-        }, str_split(strrev($aboveHundreds), 2));
-        if (!empty($aboveHundredsArr)) {
+        list($integerVal, $pointVal) = explode('.', $input);
+        $pointInWords = parent::lessThan100($pointVal, $lang);
+        list($aboveHundreds, $hundreds) = $integerVal > 999 ? preg_split('/(?<=.{' . (strlen($integerVal) - 3) . '})/', $integerVal, 2) : [0, $integerVal];
+        $integerInWords = parent::lessThan1000($hundreds, $lang);
+        if ($aboveHundreds > 0) {
+            $aboveHundredsArr = array_map(function ($num) {
+                return strrev($num);
+            }, str_split(strrev($aboveHundreds), 2));
             foreach ($aboveHundredsArr as $key => $number) {
-                $rupeesInWords = ($number > 0) ? (parent::lessThan100($number) . ' ' . $this->en[$key] . ' ' . $rupeesInWords) : '';
+
+                switch ($lang) {
+                    case 'en':
+                        $largeNumVal = $this->nnsEN[$key];
+                        break;
+                    case 'np':
+                        $largeNumVal = $this->nnsNP[$key];
+                        break;
+                    default:
+                        throw new Exception('Error in NNS : Supported languages are nepali / english');
+                }
+
+                $integerInWords = ($number > 0) ? (parent::lessThan100($number, $lang) . ' ' .  $largeNumVal . ' ' . $integerInWords) : '';
             }
         }
         return [
-            'integerInWords' => $rupeesInWords,
-            'pointsInWords' => $paisaInWords
+            'integerInWords' => $integerInWords,
+            'pointsInWords' => $pointInWords
         ];
     }
-
 }
