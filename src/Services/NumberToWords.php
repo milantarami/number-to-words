@@ -27,7 +27,7 @@ class NumberToWords
         'एकसट्ठी', 'बयसट्ठी', 'त्रिसट्ठी', 'चौंसट्ठी', 'पैंसट्ठी', 'छयसट्ठी', 'सतसट्ठी', 'अठसट्ठी', 'उनन्सत्तरी', 'सत्तरी',
         'एकहत्तर', 'बहत्तर', 'त्रिहत्तर', 'चौहत्तर', 'पचहत्तर', 'छहत्तर', 'सत्हत्तर', 'अठ्हत्तर', 'उनास्सी', 'अस्सी',
         'एकासी', 'बयासी', 'त्रीयासी', 'चौरासी', 'पचासी', 'छयासी', 'सतासी', 'अठासी', 'उनान्नब्बे', 'नब्बे',
-        'एकान्नब्बे', 'बयान्नब्बे', 'त्रियान्नब्बे', 'चौरान्नब्बे', 'पंचान्नब्बे', 'छयान्नब्बे', 'सन्तान्‍नब्बे', 'अन्ठान्नब्बे', 'उनान्सय', ' एक सय'
+        'एकान्नब्बे', 'बयान्नब्बे', 'त्रियान्नब्बे', 'चौरान्नब्बे', 'पंचान्नब्बे', 'छयान्नब्बे', 'सन्तान्‍नब्बे', 'अन्ठान्नब्बे', 'उनान्सय', 'सय'
     ];
 
     private $nepaliNumberingSystem, $internationalNumberingSystem;
@@ -56,7 +56,8 @@ class NumberToWords
                 $result = $nepaliNumberingSystem->output($input, $lang);
                 break;
             case 'ins':
-
+                $internationalNumberingSystem = new InternationalNumberingSystem();
+                $result = $internationalNumberingSystem->output($input, $lang);
                 break;
             default:
                 throw new Exception('Unkonwn Numbering System');
@@ -74,14 +75,19 @@ class NumberToWords
         $numArr = str_split($number, 1);
         switch ($lang) {
             case 'en':
-                return $number < 20 ? $this->en1[(int) $number] : (($number % 10 == 0) ? $this->en2[$numArr[0]] : $this->en2[$numArr[0]] . '-' . strtolower($this->en1[$numArr[1]]));
+                if ($number < 20) {
+                    $inWords = $this->en1[$number];
+                } else {
+                    $inWords = ($number % 10 == 0) ? $this->en2[$numArr[0]] : $this->en2[$numArr[0]] . '-' . strtolower($this->en1[$numArr[1]]);
+                }
                 break;
             case 'np':
-                return $this->np[$number];
+                $inWords = $this->np[$number];
                 break;
             default:
                 throw new Exception('Supported language English / Nepali');
         }
+        return $inWords;
     }
 
     /**
@@ -93,16 +99,26 @@ class NumberToWords
         $numArr =  array_map(function ($num) {
             return strrev($num);
         }, str_split(strrev($number), 2));
+
         switch ($lang) {
             case 'en':
-                return array_key_exists('1', $numArr) && $numArr[1] > 0 ? $this->en1[$numArr[1]] . ' ' . $this->np[10] . ' ' . $this->lessThan100($numArr[0], $lang) : $this->lessThan100($numArr[0], $lang);
+                if (array_key_exists('1', $numArr) && $numArr[1] > 0) {
+                    $inWords = $this->en1[$numArr[1]] . ' ' . $this->en2[10] . ' ' . $this->lessThan100((int)$numArr[0], $lang);
+                } else {
+                    $inWords =  $this->lessThan100($numArr[0], $lang);
+                }
                 break;
             case 'np':
-                return array_key_exists('1', $numArr) && $numArr[1] > 0 ? $this->np[$numArr[1]] . ' ' . $this->np[100] . ' ' . $this->lessThan100($numArr[0], $lang) : $this->lessThan100($numArr[0], $lang);
+                if (array_key_exists('1', $numArr) && $numArr[1] > 0) {
+                    $inWords = $this->np[$numArr[1]] . ' ' . $this->np[100] . ' ' . $this->lessThan100((int)$numArr[0], $lang);
+                } else {
+                    $inWords =  $this->lessThan100((int)$numArr[0], $lang);
+                }
                 break;
             default:
                 throw new Exception('Supported language English / Nepali');
         }
+        return $inWords;
     }
 
     private function isValidInput()
