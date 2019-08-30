@@ -59,7 +59,6 @@ class NumberToWords
                 throw new Exception("Error Processing Request", 1);
         }
         $monetaryUnit = array_key_exists('monetary_unit', $optional) ? $optional['monetary_unit'] : $monetaryUnit;
-        dd($monetaryUnit);
         $responseType = array_key_exists('response_type', $optional) ? $optional['response_type'] : config('number_to_words.response_type');
         switch ($numberingSystem) {
             case 'nns':
@@ -73,12 +72,37 @@ class NumberToWords
             default:
                 throw new Exception('Unkonwn Numbering System');
         }
-        $result = $this->processResult($result, $lang);
+        $result = $this->processResult($result, $lang, $monetaryUnitEnable, $monetaryUnit, $responseType);
         dd($result);
     }
 
-    protected function processResult() {
 
+    /** 
+    * Modify Output 
+    * @param Array $result
+    * @param String $lang
+    * @param Array $monetaryUnit
+    * @param String $responseType
+    **/    
+    private function processResult($result, $lang, $monetaryUnitEnable, $monetaryUnit, $responseType) 
+    {
+        $processedResult = '';
+        switch($responseType) {
+            case 'string':
+                if( $monetaryUnitEnable ) {
+                   $processedResult =  
+                } else {
+
+                }
+            break;
+            case 'array':
+
+            break;
+            default:
+                throw new Exception("Response Type not supported . Supported response type ( string, array ).");
+                
+
+        }
     }
 
     /**
