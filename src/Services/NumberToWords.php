@@ -46,9 +46,20 @@ class NumberToWords
     public function get($input, $optional = [])
     {
         $monetaryUnitEnable = array_key_exists('monetary_unit_enable', $optional) ? $optional['monetary_unit_enable'] : config('number_to_words.monetary_unit_enable');
-        $monetaryUnit = array_key_exists('monetary_unit', $optional) ? $optional['monetary_unit'] : config('number_to_words.monetary_unit');
         $numberingSystem = array_key_exists('numbering_system', $optional) ? $optional['numbering_system'] : config('number_to_words.numbering_system');
         $lang = array_key_exists('lang', $optional) ? $optional['lang'] : config('number_to_words.lang');
+        switch($lang) {
+            case 'en':
+                $monetaryUnit = config('number_to_words.monetary_unit.en');
+            break;
+            case 'np':
+                $monetaryUnit = config('number_to_words.monetary_unit.np');
+            break;
+            default:
+                throw new Exception("Error Processing Request", 1);
+        }
+        $monetaryUnit = array_key_exists('monetary_unit', $optional) ? $optional['monetary_unit'] : $monetaryUnit;
+        dd($monetaryUnit);
         $responseType = array_key_exists('response_type', $optional) ? $optional['response_type'] : config('number_to_words.response_type');
         switch ($numberingSystem) {
             case 'nns':
@@ -62,8 +73,12 @@ class NumberToWords
             default:
                 throw new Exception('Unkonwn Numbering System');
         }
-
+        $result = $this->processResult($result, $lang);
         dd($result);
+    }
+
+    protected function processResult() {
+
     }
 
     /**

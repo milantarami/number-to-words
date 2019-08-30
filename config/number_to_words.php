@@ -36,8 +36,9 @@ return [
 
     /** 
     * Monetary Units for Nepal [ in English and Nepali ]
+    * ex [ 'Dollar', 'Cent ]
     **/
-
+        
     'monetary_unit' => [
 
         'en' => [ 
