@@ -90,9 +90,10 @@ class NumberToWords
         switch($responseType) {
             case 'string':
                 if( $monetaryUnitEnable ) {
-                   $processedResult =  
+                   $processedResult = !empty($result['integerInWords']) ? $result['integerInWords'] . ' ' . $monetaryUnit[0] : '';
+                   $
                 } else {
-
+                   $processedResult = 
                 }
             break;
             case 'array':
