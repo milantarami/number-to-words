@@ -56,8 +56,6 @@ class NumberToWords
             case 'np':
                 $monetaryUnit = config('number_to_words.monetary_unit.np');
                 break;
-            default:
-                throw new Exception("Unsupported language . Supported Types are  'en' , 'np' . ");
         }
         $monetaryUnit = array_key_exists('monetary_unit', $optional) ? $optional['monetary_unit'] : $monetaryUnit;
         $responseType = array_key_exists('response_type', $optional) ? $optional['response_type'] : config('number_to_words.response_type');
