@@ -3,6 +3,7 @@
 namespace MilanTarami\NumberToWordsConverter\Services;
 
 use MilanTarami\NumberToWordsConverter\Services\NumberToWords;
+use MilanTarami\NumberToWordsConverter\Exceptions\NumberToWordsException;
 
 class NepaliNumberingSystem extends NumberToWords
 {
@@ -42,8 +43,6 @@ class NepaliNumberingSystem extends NumberToWords
                     case 'np':
                         $largeNumVal = $this->nnsNP[$key];
                         break;
-                    default:
-                        throw new Exception('Error in NNS : Supported languages are nepali / english');
                 }
                 $integerInWords = ($number > 0) ? (parent::lessThan100((int) $number, $lang) . ' ' .  $largeNumVal . ' ' . $integerInWords) : '';
             }

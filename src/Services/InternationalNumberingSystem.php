@@ -34,8 +34,6 @@ class InternationalNumberingSystem extends NumberToWords
                     case 'np':
                         $largeNumVal = $this->insNP[$key];
                         break;
-                    default:
-                        throw new Exception('Unsupported Language : Supported languages are en / np');
                 }
                 $integerInWords = ($number > 0) ? (parent::lessThan1000((int)$number, $lang) . ' ' .  $largeNumVal . ' ' . $integerInWords) : '';
             }
