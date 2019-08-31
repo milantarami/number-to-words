@@ -49,8 +49,12 @@ class NepaliNumberingSystem extends NumberToWords
             }
         }
         return [
-            'integerInWords' => $integerInWords,
-            'pointsInWords' => $pointInWords
+            'integer' => (int)$integerVal,
+            'integer_in_words' => trim($integerInWords),
+            'point' => (int)$pointVal,
+            'point_in_words' => trim($pointInWords),
+            'original_input' => (int)$input,
+            'formatted_input' => $input = number_format(intval($input * 100) / 100, 2, '.', ','),
         ];
     }
 }

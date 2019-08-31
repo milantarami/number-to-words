@@ -8,7 +8,7 @@ class InternationalNumberingSystem extends NumberToWords
 {
 
     private $insEN = [
-      'thousand' ,'million', 'billion', 'trillon', 'quadrillion', 'quintillion'
+      '', 'Thousand' ,'Million', 'Billion', 'Trillon', 'Quadrillion', 'Quintillion'
     ];
 
     private $insNP = [
@@ -35,17 +35,21 @@ class InternationalNumberingSystem extends NumberToWords
                         $largeNumVal = $this->insNP[$key];
                         break;
                     default:
-                        throw new Exception('Error in NNS : Supported languages are nepali / english');
+                        throw new Exception('Unsupported Language : Supported languages are en / np');
                 }
                 $integerInWords = ($number > 0) ? (parent::lessThan1000((int)$number, $lang) . ' ' .  $largeNumVal . ' ' . $integerInWords) : '';
             }
+        } else {
+            $integerInWords = 'Zero';
         }
        
         return [
-            'integerInWords' => $integerInWords,
-            'pointsInWords' => $pointInWords,
-            'originalInput' => $input,
-            'formattedInput' => $input = number_format(intval($input * 100) / 100, 2, '.', '')
+            'integer' => (int)$integerVal,
+            'integer_in_words' => trim($integerInWords),
+            'point' => (int)$pointVal,
+            'point_in_words' => trim($pointInWords),
+            'original_input' => (int)$input,
+            'formatted_input' => $input = number_format(intval($input * 100) / 100, 2, '.', ','),
         ];
 
      }
