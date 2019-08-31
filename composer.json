@@ -1,6 +1,6 @@
 {
     "name": "milantarami/number-to-words",
-    "description": "A sweet package for converting a number to words that support Nepali & Internationa Numbering System",
+    "description": "A sweet package for converting a number to words that support Nepali & International Numbering System",
     "type": "library",
     "license": "MIT",
     "authors": [
