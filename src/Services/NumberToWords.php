@@ -48,7 +48,7 @@ class NumberToWords
     {
         $monetaryUnitEnable = array_key_exists('monetary_unit_enable', $optional) ? $optional['monetary_unit_enable'] : config('number_to_words.monetary_unit_enable');
         $numberingSystem = array_key_exists('numbering_system', $optional) ? $optional['numbering_system'] : config('number_to_words.numbering_system');
-        $lang = array_key_exists('lang', $optional) ? $optional['lang'] : config('number_to_words.lang');
+        $lang = array_key_exists('lang', $optional) ? strtolower($optional['lang']) : config('number_to_words.lang');
         switch($lang) {
             case 'en':
                 $monetaryUnit = config('number_to_words.monetary_unit.en');
@@ -91,17 +91,26 @@ class NumberToWords
             $result['integer_in_words'] = ( $result['integer'] !== 0 ) ? $result['integer_in_words'] . ' ' . $monetaryUnit[0] : '';
             $result['point_in_words'] = ($result['point'] !== 0) ? $result['point_in_words'] . ' ' . $monetaryUnit[1] : '';
          }
-        $processedResult = '';
-        switch($responseType) {
+         switch($lang) {
+            case 'en':
+                $separator = ' and ';
+            break;
+            case 'np':
+                $separator = ' ';
+            break;
+            default:
+                throw new Exception("Unsupported language . Supported Types are  'en' , 'np' . ");
+        }
+         $result['in_words'] = $result['integer_in_words']  . ( !empty($result['point_in_words']) ? $separator : '' ) . $result['point_in_words'];
+        switch(strtolower($responseType)) {
             case 'string':
-
+                return $result['in_words'];
             break;
             case 'array':
-
+                return $result;
             break;
             default:
                 throw new Exception("Response Type not supported . Supported response type ( string, array ).");
-                
         }
         return $result;
     }

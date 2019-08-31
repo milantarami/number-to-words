@@ -48,8 +48,8 @@ class InternationalNumberingSystem extends NumberToWords
             'integer_in_words' => trim($integerInWords),
             'point' => (int)$pointVal,
             'point_in_words' => trim($pointInWords),
-            'original_input' => (int)$input,
-            'formatted_input' => $input = number_format(intval($input * 100) / 100, 2, '.', ','),
+            'original_input' => (float)$input,
+            'formatted_input' => number_format(intval($input * 100) / 100, 2, '.', ','),
         ];
 
      }
