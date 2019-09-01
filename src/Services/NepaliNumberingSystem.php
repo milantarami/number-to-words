@@ -25,7 +25,7 @@ class NepaliNumberingSystem extends NumberToWords
          * PHP dropping decimals without rounding up
          * https://stackoverflow.com/a/9079182/10525009
          **/
-        $input = number_format(intval($input * 100) / 100, 2, '.', '');
+        $input = number_format(($input * 100) / 100, 2, '.', '');
         list($integerVal, $pointVal) = explode('.', $input);
         $pointInWords = parent::lessThan100((int) $pointVal, $lang);
         list($aboveHundreds, $hundreds) = $integerVal > 999 ? preg_split('/(?<=.{' . (strlen($integerVal) - 3) . '})/', $integerVal, 2) : [0, $integerVal];

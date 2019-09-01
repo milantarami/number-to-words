@@ -17,7 +17,7 @@ class InternationalNumberingSystem extends NumberToWords
 
     public function output($input, $lang)
     {
-        $input = number_format(intval($input * 100) / 100, 2, '.', '');
+        $input = number_format(($input * 100) / 100, 2, '.', '');
         list($integerVal, $pointVal) = explode('.', $input);
         $pointInWords = $this->lessThan100((int)$pointVal, $lang);
         $integerInWords = '';

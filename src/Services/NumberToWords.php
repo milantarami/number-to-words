@@ -176,33 +176,24 @@ class NumberToWords
     private function checkException($lang, $responseType, $monetaryUnitEnable, $numberingSystem, $monetaryUnit)
     {
 
-        if (gettype($lang) == 'string') {
-            if (!in_array($lang, ['en', 'np'])) {
-                throw new MilanTaramiNumberToWordsException('Language not supported. Supported languages are English (en), Nepali (np).');
-            }
-        } else {
-            throw new NumberToWordsException("'lang' " . 'must be string type.' . 'Given ' . gettype($lang) . ' type.');
+        if (!in_array($lang, ['en', 'np'])) {
+            throw new MilanTaramiNumberToWordsException('Language not supported. Supported languages are English (en), Nepali (np).');
         }
 
-        if (gettype($responseType) == 'string') {
-            if (!in_array($responseType, ['string', 'array'])) {
-                throw new MilanTaramiNumberToWordsException('Reponse Type not supported. Supported types are Array, String.');
-            }
-        } else {
-            throw new NumberToWordsException("'response_type' " . 'must be string type.' . 'Given ' . gettype($responseType) . ' type.');
+
+        if (!in_array($responseType, ['string', 'array'])) {
+            throw new MilanTaramiNumberToWordsException('Reponse Type not supported. Supported types are Array, String.');
         }
 
-        if (!(gettype($monetaryUnitEnable) == 'boolean')) {
+
+        if (!in_array($monetaryUnitEnable, [ true, false ])) {
             throw new MilanTaramiNumberToWordsException("'monetary_unit_enable' value must be boolean value");
         }
 
-        if (gettype($numberingSystem) == 'string') {
-            if (!in_array($numberingSystem, ['nns', 'ins'])) {
-                throw new MilanTaramiNumberToWordsException('Unsupported Numbering System. Supported Numbering System are International Numbering System ( ins ), Nepali Numbering System ( nns )');
-            }
-        } else {
-            throw new NumberToWordsException("'numbering_system' " . 'must be string type.' . 'Given ' . gettype($responseType) . ' type.');
+        if (!in_array($numberingSystem, ['nns', 'ins'])) {
+            throw new MilanTaramiNumberToWordsException('Unsupported Numbering System. Supported Numbering System are International Numbering System ( ins ), Nepali Numbering System ( nns )');
         }
+        
         if (strtolower(gettype($monetaryUnit)) == 'array') {
             if (sizeof($monetaryUnit) == 2) { 
                 if(gettype($monetaryUnit[0]) !== 'string' || gettype($monetaryUnit[1]) !== 'string') {
@@ -212,7 +203,7 @@ class NumberToWords
                 throw new NumberToWordsException("'monetary_unit' must be of length 2");
             }
         } else { 
-            throw new NumberToWordsException("'monetary_unit' " . 'must be string type.' . 'Given ' . gettype($responseType) . ' type.');
+            throw new NumberToWordsException("'monetary_unit' " . 'must be array type.' . 'Given ' . gettype($responseType) . ' type.');
         }
     }
 }
