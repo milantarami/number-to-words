@@ -43,14 +43,13 @@ class InternationalNumberingSystem extends NumberToWords
         } else {
             $integerInWords = 'Zero';
         }
-       
         return [
             'integer' => (int)$integerVal,
             'integer_in_words' => trim($integerInWords),
             'point' => (int)$pointVal,
             'point_in_words' => trim($pointInWords),
-            'original_input' => (float)$input,
-            'formatted_input' => number_format(intval($input * 100) / 100, 2, '.', ','),
+            'original_input' => $input,
+            'formatted_input' => number_format(($input * 100) / 100, 2, '.', ','),
         ];
 
      }

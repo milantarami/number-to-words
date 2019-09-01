@@ -123,13 +123,13 @@ class NumberToWords
         switch ($lang) {
             case 'en':
                 if ($number < 20) {
-                    $inWords = ($number == 0) ? 'Zero' : $this->en1[$number];
+                    $inWords = ($number == 0) ? '' : $this->en1[(int)$number];
                 } else {
-                    $inWords = ($number % 10 == 0) ? $this->en2[$numArr[0]] : $this->en2[$numArr[0]] . '-' . strtolower($this->en1[$numArr[1]]);
+                    $inWords = ($number % 10 == 0) ? $this->en2[(int)$numArr[0]] : $this->en2[(int)$numArr[0]] . '-' . strtolower($this->en1[(int)$numArr[1]]);
                 }
                 break;
             case 'np':
-                $inWords = $this->np[$number];
+                $inWords = $this->np[(int)$number];
                 break;
         }
         return $inWords;
@@ -149,16 +149,16 @@ class NumberToWords
             case 'en':
                 if (array_key_exists('1', $numArr) && $numArr[1] > 0) {
                     // $inWords = $this->en1[$numArr[1]] . ' ' . $this->en2[10] . ' ' . $this->lessThan100((int) $numArr[0], $lang);
-                    $inWords = $this->en1[$numArr[1]] . ' ' . $this->en2[10];
+                    $inWords = $this->en1[(int)$numArr[1]] . ' ' . $this->en2[10];
                     $inWords .= ( $numArr[0] > 0) ? ' ' . $this->lessThan100((int) $numArr[0], $lang) : '';
                 } else {
-                    $inWords =  $this->lessThan100($numArr[0], $lang);
+                    $inWords =  $this->lessThan100((int)$numArr[0], $lang);
                 }
                 break;
             case 'np':
                 if (array_key_exists('1', $numArr) && $numArr[1] > 0) {
                     // $inWords = $this->np[$numArr[1]] . ' ' . $this->np[100] . ' ' . $this->lessThan100((int) $numArr[0], $lang);
-                    $inWords = $this->np[$numArr[1]] . ' ' . $this->np[100];
+                    $inWords = $this->np[(int)$numArr[1]] . ' ' . $this->np[100];
                     $inWords .= ($numArr[0] > 0 ) ? ' ' . $this->lessThan100((int) $numArr[0], $lang) : '';
                 } else {
                     $inWords =  $this->lessThan100((int) $numArr[0], $lang);
@@ -173,6 +173,10 @@ class NumberToWords
     {
         if (!is_numeric($input)) {
             throw new NumberToWordsException('Input must be int or float type. Given ' . gettype($input) . ' type.');
+        }
+
+        if($input > 9999999999999.99){
+            throw new NumberToWordsException('Max supported number is 9999999999999.99');
         }
 
         if (gettype($optional) !== 'array') {

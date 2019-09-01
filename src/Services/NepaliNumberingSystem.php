@@ -21,6 +21,7 @@ class NepaliNumberingSystem extends NumberToWords
 
     public function output($input, $lang)
     {
+        // dd($input);
         /**
          * PHP dropping decimals without rounding up
          * https://stackoverflow.com/a/9079182/10525009
@@ -44,7 +45,9 @@ class NepaliNumberingSystem extends NumberToWords
                         $largeNumVal = $this->nnsNP[$key];
                         break;
                 }
-                $integerInWords = ($number > 0) ? (parent::lessThan100((int) $number, $lang) . ' ' .  $largeNumVal . ' ' . $integerInWords) : '';
+                if((int)$number > 0) {
+                    $integerInWords = parent::lessThan100((int) $number, $lang) . ' ' .  $largeNumVal . ' ' . $integerInWords;
+                }
             }
         }
         return [
@@ -52,7 +55,7 @@ class NepaliNumberingSystem extends NumberToWords
             'integer_in_words' => trim($integerInWords),
             'point' => (int) $pointVal,
             'point_in_words' => trim($pointInWords),
-            'original_input' => (float) $input,
+            'original_input' => $input,
             'formatted_input' => $this->moneyFormat($input),
         ];
     }
