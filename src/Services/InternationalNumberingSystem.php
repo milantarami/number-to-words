@@ -26,16 +26,19 @@ class InternationalNumberingSystem extends NumberToWords
                 return strrev($num);
             }, str_split(strrev($integerVal), 3));
             foreach ($integerValArray as $key => $number) {
-
+                
                 switch ($lang) {
                     case 'en':
-                        $largeNumVal = $this->insEN[$key];
-                        break;
+                    $largeNumVal = $this->insEN[$key];
+                    break;
                     case 'np':
-                        $largeNumVal = $this->insNP[$key];
-                        break;
+                    $largeNumVal = $this->insNP[$key];
+                    break;
                 }
-                $integerInWords = ($number > 0) ? (parent::lessThan1000((int)$number, $lang) . ' ' .  $largeNumVal . ' ' . $integerInWords) : '';
+
+                if((int)$number > 0) {
+                    $integerInWords = parent::lessThan1000((int)$number, $lang) . ' ' .  $largeNumVal . ' ' . $integerInWords;
+                }
             }
         } else {
             $integerInWords = 'Zero';

@@ -148,14 +148,18 @@ class NumberToWords
         switch ($lang) {
             case 'en':
                 if (array_key_exists('1', $numArr) && $numArr[1] > 0) {
-                    $inWords = $this->en1[$numArr[1]] . ' ' . $this->en2[10] . ' ' . $this->lessThan100((int) $numArr[0], $lang);
+                    // $inWords = $this->en1[$numArr[1]] . ' ' . $this->en2[10] . ' ' . $this->lessThan100((int) $numArr[0], $lang);
+                    $inWords = $this->en1[$numArr[1]] . ' ' . $this->en2[10];
+                    $inWords .= ( $numArr[0] > 0) ? ' ' . $this->lessThan100((int) $numArr[0], $lang) : '';
                 } else {
                     $inWords =  $this->lessThan100($numArr[0], $lang);
                 }
                 break;
             case 'np':
                 if (array_key_exists('1', $numArr) && $numArr[1] > 0) {
-                    $inWords = $this->np[$numArr[1]] . ' ' . $this->np[100] . ' ' . $this->lessThan100((int) $numArr[0], $lang);
+                    // $inWords = $this->np[$numArr[1]] . ' ' . $this->np[100] . ' ' . $this->lessThan100((int) $numArr[0], $lang);
+                    $inWords = $this->np[$numArr[1]] . ' ' . $this->np[100];
+                    $inWords .= ($numArr[0] > 0 ) ? ' ' . $this->lessThan100((int) $numArr[0], $lang) : '';
                 } else {
                     $inWords =  $this->lessThan100((int) $numArr[0], $lang);
                 }
