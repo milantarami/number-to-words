@@ -1,4 +1,4 @@
 # Number to words
 
-### Tnstall package
+### Install package
 <code>composer require milantarami/number-to-words<code>
