@@ -57,7 +57,8 @@ class NumberToWords
                 $monetaryUnit = config('number_to_words.monetary_unit.np');
                 break;
             default:
-                throw new Exception("Unsupported language . Supported Types are  'en' , 'np' . ");
+                throw new MilanTaramiNumberToWordsException('Language not supported. Supported languages are English (en), Nepali (np).');
+
         }
         $monetaryUnit = array_key_exists('monetary_unit', $optional) ? $optional['monetary_unit'] : $monetaryUnit;
         $responseType = array_key_exists('response_type', $optional) ? $optional['response_type'] : config('number_to_words.response_type');
@@ -87,8 +88,8 @@ class NumberToWords
     private function processResult($result, $lang, $monetaryUnitEnable, $monetaryUnit, $responseType)
     {
         if ($monetaryUnitEnable) {
-            $result['integer_in_words'] = ($result['integer'] !== 0) ? $result['integer_in_words'] . ' ' . $monetaryUnit[0] : '';
-            $result['point_in_words'] = ($result['point'] !== 0) ? $result['point_in_words'] . ' ' . $monetaryUnit[1] : '';
+            $result['integer_in_words'] = ($result['integer'] > 0) ? $result['integer_in_words'] . ' ' . $monetaryUnit[0] : '';
+            $result['point_in_words'] = ($result['point'] > 0) ? $result['point_in_words'] . ' ' . $monetaryUnit[1] : '';
         }
         switch ($lang) {
             case 'en':
@@ -98,7 +99,9 @@ class NumberToWords
                 $separator = ' ';
                 break;
         }
-        $result['in_words'] = $result['integer_in_words']  . (!empty($result['point_in_words']) ? $separator : '') . $result['point_in_words'];
+        $result['in_words'] = ($result['integer'] > 0) ? $result['integer_in_words']  : '';
+        $result['in_words'] .= ($result['integer'] > 0) && ($result['point'] > 0) ? $separator : '';
+        $result['in_words'] .= $result['point_in_words'];
         switch (strtolower($responseType)) {
             case 'string':
                 return $result['in_words'];
