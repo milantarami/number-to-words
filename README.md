@@ -11,7 +11,7 @@ You can install this package via composer using:
 composer require milantarami/number-to-words
 ```
 
-The package will automatically register its service provider.
+The package will automatically register its service provider. <br/>
 To publish the config file to config/number_to_words.php run:
 
 ``` bash
