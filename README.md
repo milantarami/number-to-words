@@ -105,3 +105,10 @@ return [
 ```
 
 ##  Basic Usage
+
+``` bash
+use NumberToWords;
+
+$input = 123456789;
+$inWords = NumberToWords::get($input);
+```
