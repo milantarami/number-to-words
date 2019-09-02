@@ -21,7 +21,7 @@ return [
     /** 
     * supported Response Type
     * [ 'string', 'array' ]
-    * default = en
+    * default = string
     **/
 
     'response_type' => 'string',
