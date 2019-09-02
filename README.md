@@ -1,8 +1,8 @@
 # Number to words
 
-[![Issues](https://img.shields.io/github/issues/milantarami/number-to-words?format=flat-square)](https://github.com/milantarami/number-to-words/issues)
-[![Stars](https://img.shields.io/github/stars/milantarami/number-to-words?format=flat-square)](https://github.com/milantarami/number-to-words/stargazers)
-[![Total Downloads](https://img.shields.io/packagist/dt/spatie/laravel-backup.svg?style=flat-square)](https://packagist.org/packages/spatie/laravel-backup)
+[![Issues](https://img.shields.io/github/issues/milantarami/number-to-words?style=flat-square&logo=appveyor)](https://github.com/milantarami/number-to-words/issues)
+[![Stars](https://img.shields.io/github/stars/milantarami/number-to-words?style=flat-square&logo=appveyor)](https://github.com/milantarami/number-to-words/stargazers)
+[![Total Downloads](https://img.shields.io/packagist/dt/spatie/laravel-backup.svg?style=flat-square&logo=appveyor)](https://packagist.org/packages/milantarami/number-to-words)
 
 ## Installation and setup
 
