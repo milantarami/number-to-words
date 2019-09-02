@@ -13,7 +13,7 @@ composer require milantarami/number-to-words
 ```
 
 The package will automatically register its service provider for laravel 5.5.* and above. <br>
-For below version need to register a service provider in <code>config/app.php</code>
+For below version need to register a service provider manually in <code>config/app.php</code>
 
 ``` bash
 'providers' => [
@@ -25,6 +25,18 @@ For below version need to register a service provider in <code>config/app.php</c
    MilanTarami\NumberToWordsConverter\NumberToWordsServiceProvider::class         
 
 ],
+```
+
+The package will automatically load alias for laravel 5.5.* and above. <br>
+For below version need to add alias manually in <code>config/app.php</code>
+
+``` bash
+'aliases' => [
+    .
+    .
+    'NumberToWords' => MilanTarami\NumberToWordsConverter\Facades\NumberToWordsFacade::class,
+
+]
 ```
 
 To publish the config file to <code>config/number_to_words.php</code> run:
