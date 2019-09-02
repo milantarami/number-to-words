@@ -16,15 +16,15 @@ The package will automatically register its service provider for laravel 5.5.* a
 For laravel 5.4.* and below version need to register a service provider in <code>config/app.php</code>
 
 ``` bash
-     'providers' => [
+'providers' => [
 
-         /*
-         * Package Service Providers...
-         */
-         
-        MilanTarami\NumberToWordsConverter\NumberToWordsServiceProvider::class         
-
-     ],
+    /*
+    * Package Service Providers...
+    */
+    
+   MilanTarami\NumberToWordsConverter\NumberToWordsServiceProvider::class         
+   
+],
 ```
 
 To publish the config file to config/number_to_words.php run:
