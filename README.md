@@ -12,8 +12,8 @@ You can install this package via composer using:
 composer require milantarami/number-to-words
 ```
 
-The package will automatically register its service provider for laravel 5.5.* and above.
-For laravel 5.4.* and below version need to register a service provider in <code>config/app.php</code>
+The package will automatically register its service provider for laravel 5.5.* and above. <br>
+For below version need to register a service provider in <code>config/app.php</code>
 
 ``` bash
 'providers' => [
@@ -23,7 +23,7 @@ For laravel 5.4.* and below version need to register a service provider in <code
     */
     
    MilanTarami\NumberToWordsConverter\NumberToWordsServiceProvider::class         
-   
+
 ],
 ```
 
