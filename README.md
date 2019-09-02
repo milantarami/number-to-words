@@ -27,7 +27,7 @@ For below version need to register a service provider in <code>config/app.php</c
 ],
 ```
 
-To publish the config file to config/number_to_words.php run:
+To publish the config file to <code>config/number_to_words.php</code> run:
 
 ``` bash
 php artisan vendor:publish --tag=number-to-words-config
