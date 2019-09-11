@@ -107,7 +107,8 @@ return [
 ##  Basic Usage
 
 ``` bash
-dd(NumberToWords::get(123456789));
+echo NumberToWords::get(123456789);
+
 //output : Twelve Crore Thirty-four Lakh Fifty-six Thousand Seven Hundred Eighty-nine Rupees and Twelve Paisa
 
 ```
@@ -118,6 +119,31 @@ dd(NumberToWords::get(123456789));
 $config = [
      'monetary_unit' => [ 'Dollar', 'Cent' ],
      'numbering_system' => 'ins'
-    ];
+ ];
  echo NumberToWords::get(123456789.12, $config);
+ 
+ //output : One Hundred Twenty-three Million Four Hundred Fifty-six Thousand Seven Hundred Eighty-nine Dollar and Twelve Cent
+ 
+ 
+ 
+ $config = [
+     'monetary_unit' => [ 'Dollar', 'Cent' ],
+     'numbering_system' => 'ins',
+     'response_type' => 'array'
+ ];
+ 
+ dd(NumberToWords::get(123456789.12, $config));
+ 
+ //output :
+ array:7 [▼
+  "integer" => 123456789
+  "integer_in_words" => "One Hundred Twenty-three Million Four Hundred Fifty-six Thousand Seven Hundred Eighty-nine Dollar"
+  "point" => 12
+  "point_in_words" => "Twelve Cent"
+  "original_input" => "123456789.12"
+  "formatted_input" => "123,456,789.12"
+  "in_words" => "One Hundred Twenty-three Million Four Hundred Fifty-six Thousand Seven Hundred Eighty-nine Dollar and Twelve Cent"
+]
+ 
+ 
 ```
