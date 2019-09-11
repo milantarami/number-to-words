@@ -111,3 +111,13 @@ dd(NumberToWords::get(123456789));
 //output : Twelve Crore Thirty-four Lakh Fifty-six Thousand Seven Hundred Eighty-nine Rupees and Twelve Paisa
 
 ```
+
+## Usage with config as optional paramater
+
+``` bash
+$config = [
+     'monetary_unit' => [ 'Dollar', 'Cent' ],
+     'numbering_system' => 'ins'
+    ];
+ echo NumberToWords::get(123456789.12, $config);
+```
