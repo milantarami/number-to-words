@@ -107,8 +107,7 @@ return [
 ##  Basic Usage
 
 ``` bash
-use NumberToWords;
+dd(NumberToWords::get(123456789));
+//output : Twelve Crore Thirty-four Lakh Fifty-six Thousand Seven Hundred Eighty-nine Rupees and Twelve Paisa
 
-$input = 123456789;
-$inWords = NumberToWords::get($input);
 ```
