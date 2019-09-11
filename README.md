@@ -104,8 +104,22 @@ return [
 
 ```
 
-## config default / custom values 
+## Optional Paramater ( Array - avaliable keys and values)
 
+<table>
+    <thead>
+        <tr>
+            <th>Key</th>
+            <th>Description</th>
+            <th>Type</th>
+            <th>Avaliable Values</th>
+            <th>Default</th>
+        </tr>
+    </thead>
+    <tbody>
+    
+    </tbody>
+</table>
 
 ##  Basic Usage
 
