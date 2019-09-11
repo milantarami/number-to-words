@@ -106,7 +106,7 @@ return [
 
 ## Optional Paramater ( Array - avaliable keys and values)
 
-<table>
+<table style="width: 100%;">
     <thead>
         <tr>
             <th>Key</th>
@@ -117,7 +117,41 @@ return [
         </tr>
     </thead>
     <tbody>
-    
+        <tr>
+            <td>monetary_unit_enable</td>
+            <td></td>
+            <td>Boolean</td>
+            <td>true, false</td>
+            <td>true</td>
+         </tr>
+         <tr>
+            <td>lang</td>
+            <td></td>
+            <td>String</td>
+            <td>en, np</td>
+            <td>en</td>
+         </tr>
+         <tr>
+            <td>response_type</td>
+            <td></td>
+            <td>String</td>
+            <td>string, array</td>
+            <td>string</td>
+         </tr>
+        <tr>
+            <td>numbering_system</td>
+            <td></td>
+            <td>String</td>
+            <td>nns, ins</td>
+            <td>nns</td>
+         </tr>
+         <tr>
+            <td>monetary_unit</td>
+            <td></td>
+            <td>Array</td>
+            <td>-</td>
+            <td></td>
+         </tr>
     </tbody>
 </table>
 
