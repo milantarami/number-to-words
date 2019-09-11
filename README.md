@@ -104,6 +104,9 @@ return [
 
 ```
 
+## config default / custom values 
+
+
 ##  Basic Usage
 
 ``` bash
@@ -128,7 +131,7 @@ $config = [
  
  ```
  
- ### example 2
+ ### Example 2
  ``` bash
  $config = [
      'monetary_unit' => [ 'Dollar', 'Cent' ],
