@@ -119,38 +119,38 @@ return [
     <tbody>
         <tr>
             <td>monetary_unit_enable</td>
-            <td></td>
+            <td>Enable / Disable monetary unit in response</td>
             <td>Boolean</td>
             <td>true, false</td>
             <td>true</td>
          </tr>
          <tr>
             <td>lang</td>
-            <td></td>
+            <td>Nepali and English Languages are avaliable</td>
             <td>String</td>
             <td>en, np</td>
             <td>en</td>
          </tr>
          <tr>
             <td>response_type</td>
-            <td></td>
+            <td>Output can be returned in String and Array Format</td>
             <td>String</td>
             <td>string, array</td>
             <td>string</td>
          </tr>
         <tr>
             <td>numbering_system</td>
-            <td></td>
+            <td>Two Numbering System are avaliable are Nepali Numbering System (nns) and International Numbering System (ins)</td>
             <td>String</td>
             <td>nns, ins</td>
             <td>nns</td>
          </tr>
          <tr>
             <td>monetary_unit</td>
-            <td></td>
+            <td>You can setup your custom monetary unit in output by replacing Rupees / Paisa as Dollar / Cent . </td>
             <td>Array</td>
-            <td>-</td>
-            <td></td>
+            <td>Use custom value as array  [ 'Dollar', 'Cent' ]</td>
+            <td>Depends upon language selected</td>
          </tr>
     </tbody>
 </table>
