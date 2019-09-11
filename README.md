@@ -115,6 +115,8 @@ echo NumberToWords::get(123456789);
 
 ## Usage with config as optional paramater
 
+### Example 1
+
 ``` bash
 $config = [
      'monetary_unit' => [ 'Dollar', 'Cent' ],
@@ -124,8 +126,10 @@ $config = [
  
  //output : One Hundred Twenty-three Million Four Hundred Fifty-six Thousand Seven Hundred Eighty-nine Dollar and Twelve Cent
  
+ ```
  
- 
+ ### example 2
+ ``` bash
  $config = [
      'monetary_unit' => [ 'Dollar', 'Cent' ],
      'numbering_system' => 'ins',
