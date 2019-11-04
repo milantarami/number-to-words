@@ -104,7 +104,7 @@ return [
 
 ```
 
-## Optional Paramater ( Array - avaliable keys and values)
+## Optional Paramater ( Array - available keys and values)
 
 <table style="width: 100%;">
     <thead>
