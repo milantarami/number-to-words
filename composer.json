@@ -16,7 +16,6 @@
             "MilanTarami\\NumberToWordsConverter\\" : "src/"
         }
     },
-
     "extra": {
         "laravel": {
             "providers": [
