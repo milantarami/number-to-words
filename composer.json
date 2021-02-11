@@ -10,7 +10,6 @@
         }
     ],
     "minimum-stability": "dev",
-    "require": {},
     "autoload": {
         "psr-4": {
             "MilanTarami\\NumberToWordsConverter\\" : "src/"
@@ -22,6 +21,9 @@
                 "MilanTarami\\NumberToWordsConverter\\NumberToWordsServiceProvider"
             ]
         }
+    },
+    "require-dev": {
+        "orchestra/testbench": "6.x-dev",
+        "phpunit/phpunit": "^9.3"
     }
-
 }

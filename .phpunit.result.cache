@@ -1,0 +1,1 @@
+C:37:"PHPUnit\Runner\DefaultTestResultCache":210:{a:2:{s:7:"defects";a:1:{s:45:"NumberToWordsTest::number_to_words_in_np_lang";i:4;}s:5:"times";a:1:{s:45:"NumberToWordsTest::number_to_words_in_np_lang";d:1.774999999999999911182158029987476766109466552734375;}}}

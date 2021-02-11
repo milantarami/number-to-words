@@ -16,28 +16,28 @@ class NumberToWordsServiceProvider extends ServiceProvider
     public function register()
     {
         // $this->app->register('MilanTarami\NumberToWordsConverter\NumberToWordsServiceProvider');
-        $this->mergeConfigFrom(__DIR__.'/../config/number_to_words.php', 'number_to_words');
+        $this->mergeConfigFrom(__DIR__ . '/../config/number_to_words.php', 'number_to_words');
     }
 
     /**
      * Bootstrap services.
-     * 
+     *
      * Publishes configuration file.
-     * 
+     *
      * @return void
      */
     public function boot()
     {
-        if($this->app->runningInConsole()) {
+        if ($this->app->runningInConsole()) {
             $this->publishes(
-                [ __DIR__.'/../config/number_to_words.php' => config_path('number_to_words.php'), ],
+                [__DIR__ . '/../config/number_to_words.php' => config_path('number_to_words.php'),],
                 'number-to-words-config'
             );
         }
-        $this->app->bind('numbertowords', function() {
+        $this->app->bind('numbertowords', function () {
             return new NumberToWords();
         });
 
-        AliasLoader::getInstance()->alias('NumberToWords', 'MilanTarami\NumberToWordsConverter\Facades\NumberToWordsFacade');
+        AliasLoader::getInstance()->alias('NumberToWords', 'MilanTarami\NumberToWordsConverter\Facades\NumberToWords');
     }
 }
