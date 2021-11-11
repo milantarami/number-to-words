@@ -31,9 +31,11 @@ class NepaliNumberingSystem extends NumberToWords
         $pointInWords = parent::lessThan100((int) $pointVal, $lang);
         list($aboveHundreds, $hundreds) = $integerVal > 999 ? preg_split('/(?<=.{' . (strlen($integerVal) - 3) . '})/', $integerVal, 2) : [0, $integerVal];
 
-
-        $integerInWords = (int)$hundreds ? parent::lessThan1000($hundreds, $lang) : '';
-
+        if ((int)$input > 100) {
+            $integerInWords = (int)$hundreds ? parent::lessThan1000($hundreds, $lang) : '';
+        } else {
+            $integerInWords = parent::lessThan1000($hundreds, $lang);
+        }
 
         if ($aboveHundreds > 0) {
             $aboveHundredsArr = array_map(function ($num) {
@@ -54,6 +56,7 @@ class NepaliNumberingSystem extends NumberToWords
                 }
             }
         }
+
         return [
             'integer' => (int) $integerVal,
             'integer_in_words' => trim($integerInWords),
