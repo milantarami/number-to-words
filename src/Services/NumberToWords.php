@@ -72,6 +72,8 @@ class NumberToWords
                 $result = $internationalNumberingSystem->output($input, $lang);
                 break;
         }
+
+
         $result = $this->processResult($result, $lang, $monetaryUnitEnable, $monetaryUnit, $responseType);
         return $result;
     }
@@ -98,7 +100,8 @@ class NumberToWords
                 $separator = ' ';
                 break;
         }
-        $result['in_words'] = ($result['integer'] > 0) ? $result['integer_in_words']  : '';
+        $result['in_words'] = ($result['integer'] > 0) ? $result['integer_in_words']  : (($result['point'] < 0) ? $result['integer_in_words']  : '');
+        // $result['in_words'] = ($result['integer'] > 0) ? $result['integer_in_words']  : '';
         $result['in_words'] .= ($result['integer'] > 0) && ($result['point'] > 0) ? $separator : '';
         $result['in_words'] .= $result['point_in_words'];
         switch (strtolower($responseType)) {
@@ -144,6 +147,7 @@ class NumberToWords
             return strrev($num);
         }, str_split(strrev($number), 2));
 
+
         switch ($lang) {
             case 'en':
                 if (array_key_exists('1', $numArr) && $numArr[1] > 0) {
@@ -164,7 +168,6 @@ class NumberToWords
                 }
                 break;
         }
-
         return $inWords;
     }
 
