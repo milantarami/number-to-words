@@ -21,7 +21,7 @@ class NumberToWords
     protected $en2  = ['', 'Ten', 'Twenty', 'Thirty', 'Forty', 'Fifty', 'Sixty', 'Seventy', 'Eighty', 'Ninety', 'Hundred'];
 
     protected $np = [
-        's', 'एक', 'दुई', 'तिन', 'चार', 'पाँच', 'छ', 'सात', 'आठ', 'नौ', 'दश',
+        'सुन्य', 'एक', 'दुई', 'तिन', 'चार', 'पाँच', 'छ', 'सात', 'आठ', 'नौ', 'दश',
         'एघार', 'बाह्र', 'तेह्र', 'चौध', 'पन्ध्र', 'सोह्र', 'सत्र', 'अठार', 'उन्नाइस', 'बिस',
         'एक्काइस', 'बाइस', 'तेइस', 'चौबिस', 'पच्चीस', 'छब्बीस', 'सत्ताइस', 'अठाइस', 'उनन्तीस', 'तिस',
         'एकतिस', 'बत्तीस', 'तेत्तीस', 'चाैतीस', 'पैतिस', 'छत्तीस', 'सरतीस', 'अरतीस', 'उननचालीस', 'चालीस',
@@ -37,7 +37,7 @@ class NumberToWords
     // references http://www.nepaliclass.com/large-nepali-numbers-lakh-karod-arab-kharab/
 
     /**
-     * 
+     *
      * @param Mixed $input
      * @param Array $optional array_keys => [  ]
      * **/
@@ -58,7 +58,6 @@ class NumberToWords
                 break;
             default:
                 throw new MilanTaramiNumberToWordsException('Language not supported. Supported languages are English (en), Nepali (np).');
-
         }
         $monetaryUnit = array_key_exists('monetary_unit', $optional) ? $optional['monetary_unit'] : $monetaryUnit;
         $responseType = array_key_exists('response_type', $optional) ? $optional['response_type'] : config('number_to_words.response_type');
@@ -78,8 +77,8 @@ class NumberToWords
     }
 
 
-    /** 
-     * Modify Output 
+    /**
+     * Modify Output
      * @param Array $result
      * @param String $lang
      * @param Array $monetaryUnit
@@ -150,7 +149,7 @@ class NumberToWords
                 if (array_key_exists('1', $numArr) && $numArr[1] > 0) {
                     // $inWords = $this->en1[$numArr[1]] . ' ' . $this->en2[10] . ' ' . $this->lessThan100((int) $numArr[0], $lang);
                     $inWords = $this->en1[(int)$numArr[1]] . ' ' . $this->en2[10];
-                    $inWords .= ( $numArr[0] > 0) ? ' ' . $this->lessThan100((int) $numArr[0], $lang) : '';
+                    $inWords .= ($numArr[0] > 0) ? ' ' . $this->lessThan100((int) $numArr[0], $lang) : '';
                 } else {
                     $inWords =  $this->lessThan100((int)$numArr[0], $lang);
                 }
@@ -159,7 +158,7 @@ class NumberToWords
                 if (array_key_exists('1', $numArr) && $numArr[1] > 0) {
                     // $inWords = $this->np[$numArr[1]] . ' ' . $this->np[100] . ' ' . $this->lessThan100((int) $numArr[0], $lang);
                     $inWords = $this->np[(int)$numArr[1]] . ' ' . $this->np[100];
-                    $inWords .= ($numArr[0] > 0 ) ? ' ' . $this->lessThan100((int) $numArr[0], $lang) : '';
+                    $inWords .= ($numArr[0] > 0) ? ' ' . $this->lessThan100((int) $numArr[0], $lang) : '';
                 } else {
                     $inWords =  $this->lessThan100((int) $numArr[0], $lang);
                 }
@@ -175,7 +174,7 @@ class NumberToWords
             throw new NumberToWordsException('Input must be int or float type. Given ' . gettype($input) . ' type.');
         }
 
-        if($input > 9999999999999.99){
+        if ($input > 9999999999999.99) {
             throw new NumberToWordsException('Max supported number is 9999999999999.99');
         }
 
@@ -197,23 +196,23 @@ class NumberToWords
         }
 
 
-        if (!in_array($monetaryUnitEnable, [ true, false ])) {
+        if (!in_array($monetaryUnitEnable, [true, false])) {
             throw new MilanTaramiNumberToWordsException("'monetary_unit_enable' value must be boolean value");
         }
 
         if (!in_array($numberingSystem, ['nns', 'ins'])) {
             throw new MilanTaramiNumberToWordsException('Unsupported Numbering System. Supported Numbering System are International Numbering System ( ins ), Nepali Numbering System ( nns )');
         }
-        
+
         if (strtolower(gettype($monetaryUnit)) == 'array') {
-            if (sizeof($monetaryUnit) == 2) { 
-                if(gettype($monetaryUnit[0]) !== 'string' || gettype($monetaryUnit[1]) !== 'string') {
+            if (sizeof($monetaryUnit) == 2) {
+                if (gettype($monetaryUnit[0]) !== 'string' || gettype($monetaryUnit[1]) !== 'string') {
                     throw new NumberToWordsException("'monetary_unit' indexes value must be string type");
                 }
             } else {
                 throw new NumberToWordsException("'monetary_unit' must be of length 2");
             }
-        } else { 
+        } else {
             throw new NumberToWordsException("'monetary_unit' " . 'must be array type.' . 'Given ' . gettype($responseType) . ' type.');
         }
     }

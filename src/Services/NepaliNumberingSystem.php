@@ -30,7 +30,11 @@ class NepaliNumberingSystem extends NumberToWords
         list($integerVal, $pointVal) = explode('.', $input);
         $pointInWords = parent::lessThan100((int) $pointVal, $lang);
         list($aboveHundreds, $hundreds) = $integerVal > 999 ? preg_split('/(?<=.{' . (strlen($integerVal) - 3) . '})/', $integerVal, 2) : [0, $integerVal];
-        $integerInWords = parent::lessThan1000($hundreds, $lang);
+
+
+        $integerInWords = (int)$hundreds ? parent::lessThan1000($hundreds, $lang) : '';
+
+
         if ($aboveHundreds > 0) {
             $aboveHundredsArr = array_map(function ($num) {
                 return strrev($num);
@@ -45,7 +49,7 @@ class NepaliNumberingSystem extends NumberToWords
                         $largeNumVal = $this->nnsNP[$key];
                         break;
                 }
-                if((int)$number > 0) {
+                if ((int)$number > 0) {
                     $integerInWords = parent::lessThan100((int) $number, $lang) . ' ' .  $largeNumVal . ' ' . $integerInWords;
                 }
             }

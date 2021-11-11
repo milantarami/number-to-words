@@ -22,6 +22,10 @@
                 "MilanTarami\\NumberToWordsConverter\\NumberToWordsServiceProvider"
             ]
         }
+    },
+    "require-dev": {
+        "orchestra/testbench": "^4.0",
+        "phpunit/phpunit": "^9.0"
     }
 
 }
